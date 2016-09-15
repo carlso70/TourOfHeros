@@ -1,21 +1,10 @@
 import { Component } from '@angular/core';
 import { Hero } from './hero.ts';
-
-const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
-  { id: 12, name: 'Narco' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
-];
+import { HeroService } from './hero.service';
 
 @Component({
   selector: 'my-app',
+  providers: [ HeroService ],
   template: `
     <h1>{{title}}</h1>
     <h2>My heros</h2>
@@ -79,7 +68,9 @@ styles: [`
 export class AppComponent {
   title = 'Tour of Heros';
   selectedHero: Hero;
-  heroes = HEROES;
+  heroes: Hero[];
+
+  constructor(private heroService: HeroService) { }
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
